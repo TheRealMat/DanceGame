@@ -6,6 +6,7 @@ public class Conductor : MonoBehaviour
 {
     public LevelMusic levelMusic;
     public AudioSource musicSource;
+    private GameEvents events;
 
     //The number of seconds for each song beat
     public float secPerBeat;
@@ -19,8 +20,10 @@ public class Conductor : MonoBehaviour
     //How many seconds have passed since the song started
     public float dspSongTime;
 
+    public int songPositionInBeatsOld;
     void Start()
     {
+        events = GameObject.FindObjectOfType<GameEvents>();
 
         //Calculate the number of seconds in each beat
         secPerBeat = 60f / levelMusic.BPM;
@@ -34,10 +37,20 @@ public class Conductor : MonoBehaviour
 
     void Update()
     {
+        songPositionInBeatsOld = (int)songPositionInBeats;
+
         //determine how many seconds since the song started
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - levelMusic.firstBeatOffset);
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;
+
+        if ((int)songPositionInBeats - songPositionInBeatsOld >= 1)
+        {
+            songPositionInBeatsOld = (int)songPositionInBeats;
+
+            events.BeatHappened();
+        }
+
     }
 }
