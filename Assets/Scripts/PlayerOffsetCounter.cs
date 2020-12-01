@@ -5,7 +5,7 @@ using System.Linq;
 
 public class PlayerOffsetCounter : MonoBehaviour
 {
-    Conductor conductor;
+    GameManager gameManager;
     float songBeat;
     float playerBeat;
     Queue beatDifferences;
@@ -14,10 +14,9 @@ public class PlayerOffsetCounter : MonoBehaviour
 
     private void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+
         beatDifferences = new Queue();
-
-
-        conductor = GameObject.FindObjectOfType<Conductor>();
     }
 
 
@@ -27,15 +26,16 @@ public class PlayerOffsetCounter : MonoBehaviour
     }
 
 
+    // this should accept a time and then be called by the player controller or something
     private void PlayerTapped()
     {
         if (Input.anyKeyDown)
         {
             // time that the player thinks is the beat
-            playerBeat = conductor.GetTime();
+            playerBeat = gameManager.conductor.GetTime();
 
             // time that the game thinks is the beat (use previous beat to see if player hits too early for some reason?)
-            songBeat = conductor.currentBeatTime;
+            songBeat = gameManager.conductor.currentBeatTime;
 
             float beatDifference = playerBeat - songBeat;
 

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Conductor : MonoBehaviour
 {
-    public LevelMusic levelMusic;
-    public AudioSource musicSource;
-    private GameEvents events;
+    private GameManager gameManager;
 
     //The number of seconds for each song beat
     public float secPerBeat;
@@ -27,16 +25,16 @@ public class Conductor : MonoBehaviour
     public int songPositionInBeatsOld;
     void Start()
     {
-        events = GameObject.FindObjectOfType<GameEvents>();
+        gameManager = FindObjectOfType<GameManager>();
 
         //Calculate the number of seconds in each beat
-        secPerBeat = 60f / levelMusic.BPM;
+        secPerBeat = 60f / gameManager.levelMusic.BPM;
 
         //Record the time when the music starts
         dspSongTime = GetTime();
 
         //Start the music
-        musicSource.Play();
+        gameManager.musicSource.Play();
     }
 
     void Update()
@@ -44,7 +42,7 @@ public class Conductor : MonoBehaviour
         songPositionInBeatsOld = (int)songPositionInBeats;
 
         //determine how many seconds since the song started
-        songPosition = (GetTime() - dspSongTime - levelMusic.firstBeatOffset);
+        songPosition = (GetTime() - dspSongTime - gameManager.levelMusic.firstBeatOffset);
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;
@@ -60,7 +58,7 @@ public class Conductor : MonoBehaviour
             songPositionInBeatsOld = (int)songPositionInBeats;
 
             // fire BeatHappened event
-            events.BeatHappened();
+            gameManager.events.BeatHappened();
         }
 
     }

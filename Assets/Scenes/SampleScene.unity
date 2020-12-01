@@ -259,9 +259,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 515535058}
+  - component: {fileID: 515535062}
   - component: {fileID: 515535059}
   - component: {fileID: 515535060}
   - component: {fileID: 515535061}
+  - component: {fileID: 515535063}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -295,8 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2c47ba1ccbf3342b5b25959232f24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMusic: {fileID: 11400000, guid: 41fb45495401c474baf76c62b47d088c, type: 2}
-  musicSource: {fileID: 221999366}
   secPerBeat: 0
   songPosition: 0
   songPositionInBeats: 0
@@ -326,6 +326,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0b64da8834633b42bbc6c6f36ed984b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOffset: 0
+--- !u!114 &515535062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515535057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cb0dd5f5ca23a42ad6edd141b91d7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelMusic: {fileID: 11400000, guid: 41fb45495401c474baf76c62b47d088c, type: 2}
+  musicSource: {fileID: 221999366}
+  events: {fileID: 515535060}
+  conductor: {fileID: 515535059}
+--- !u!114 &515535063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515535057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2bceef7190c7744a48690dc4b34bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &519420028
