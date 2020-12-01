@@ -20,6 +20,10 @@ public class Conductor : MonoBehaviour
     //How many seconds have passed since the song started
     public float dspSongTime;
 
+    public float lastBeatTime;
+
+    public float currentBeatTime;
+
     public int songPositionInBeatsOld;
     void Start()
     {
@@ -29,7 +33,7 @@ public class Conductor : MonoBehaviour
         secPerBeat = 60f / levelMusic.BPM;
 
         //Record the time when the music starts
-        dspSongTime = (float)AudioSettings.dspTime;
+        dspSongTime = GetTime();
 
         //Start the music
         musicSource.Play();
@@ -40,17 +44,29 @@ public class Conductor : MonoBehaviour
         songPositionInBeatsOld = (int)songPositionInBeats;
 
         //determine how many seconds since the song started
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime - levelMusic.firstBeatOffset);
+        songPosition = (GetTime() - dspSongTime - levelMusic.firstBeatOffset);
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;
 
+        //beat incremented by one
         if ((int)songPositionInBeats - songPositionInBeatsOld >= 1)
         {
+            // store last beat time
+            lastBeatTime = currentBeatTime;
+            // get time for new beat
+            currentBeatTime = GetTime();
+
             songPositionInBeatsOld = (int)songPositionInBeats;
 
+            // fire BeatHappened event
             events.BeatHappened();
         }
 
+    }
+
+    public float GetTime()
+    {
+        return (float)AudioSettings.dspTime;
     }
 }

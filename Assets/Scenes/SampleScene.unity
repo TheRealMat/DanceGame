@@ -300,6 +300,8 @@ MonoBehaviour:
   songPosition: 0
   songPositionInBeats: 0
   dspSongTime: 0
+  lastBeatTime: 0
+  currentBeatTime: 0
   songPositionInBeatsOld: 0
 --- !u!114 &515535060
 MonoBehaviour:
