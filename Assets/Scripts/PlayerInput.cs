@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     GameManager gameManager;
+    KeyCode lastHitKey;
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -38,6 +39,10 @@ public class PlayerInput : MonoBehaviour
                 // left
                 gameManager.events.PlayerMoved(-1, 0);
             }
+        }
+        if (Input.GetKeyDown("escape"))
+        {
+            gameManager.Pause();
         }
 
 

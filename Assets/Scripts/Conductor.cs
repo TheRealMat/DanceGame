@@ -67,4 +67,15 @@ public class Conductor : MonoBehaviour
     {
         return (float)AudioSettings.dspTime;
     }
+
+
+    public void Pause()
+    {
+        AudioListener.pause = true;
+    }
+
+    public void Continue()
+    {
+        AudioListener.pause = false;
+    }
 }
