@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        // using this let's you hold down a button and then press another button to fool the system. too bad!
         if (Input.anyKeyDown)
         {
             // currently can't handle more than one input at a time, too bad!

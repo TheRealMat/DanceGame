@@ -22,6 +22,8 @@ public class Conductor : MonoBehaviour
 
     public float currentBeatTime;
 
+    public float nextBeatTime;
+
     public int songPositionInBeatsOld;
     void Start()
     {
@@ -47,13 +49,19 @@ public class Conductor : MonoBehaviour
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;
 
+
+
         //beat incremented by one
+        // i think this is wrong. think very carefully about this
         if ((int)songPositionInBeats - songPositionInBeatsOld >= 1)
         {
+
+            // at what time does the next beat happen
+            nextBeatTime = songPosition + secPerBeat;
             // store last beat time
             lastBeatTime = currentBeatTime;
             // get time for new beat
-            currentBeatTime = GetTime();
+            currentBeatTime = songPosition;
 
             songPositionInBeatsOld = (int)songPositionInBeats;
 

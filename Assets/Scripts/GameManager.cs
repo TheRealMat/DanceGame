@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public AudioSource musicSource;
     public GameEvents events;
     public Conductor conductor;
+    public Settings settings;
     private bool paused = false;
 
 

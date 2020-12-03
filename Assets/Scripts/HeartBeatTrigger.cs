@@ -8,10 +8,15 @@ public class HeartBeatTrigger : MonoBehaviour
     private void Start()
     {
         animator = this.GetComponent<Animator>();
-        GameObject.FindObjectOfType<GameEvents>().onBeat += HeartBeat;
     }
 
-    private void HeartBeat()
+    public void onBeat(){
+        GameObject.FindObjectOfType<GameEvents>().onBeat += HeartBeat;
+    }
+    public void offBeat(){
+        GameObject.FindObjectOfType<GameEvents>().onBeat -= HeartBeat;
+    }
+    public void HeartBeat()
     {
         animator.SetTrigger("HeartBeat");
     }

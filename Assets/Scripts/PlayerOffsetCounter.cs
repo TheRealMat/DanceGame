@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class PlayerOffsetCounter : MonoBehaviour
 {
@@ -9,41 +10,50 @@ public class PlayerOffsetCounter : MonoBehaviour
     float songBeat;
     float playerBeat;
     Queue beatDifferences;
-    float playerOffset;
+    public float playerOffset;
 
+    public void ApplyToSettings()
+    {
+        gameManager.settings.playerOffset = this.playerOffset;
+        gameManager.settings.Save();
+    }
 
-    private void Start()
+    private void OnEnable()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-
         beatDifferences = new Queue();
+        // start triggering on event
+        gameManager.events.onPlayerMove += PlayerTapped;
+    }
+    private void OnDisable()
+    {
+        // stop triggering on event
+        gameManager.events.onPlayerMove -= PlayerTapped;
     }
 
 
-    void Update()
+    // maybe this should accept a time and then be called by the player controller or something
+    private void PlayerTapped(int x, int y)
     {
-        PlayerTapped();
-    }
-
-
-    // this should accept a time and then be called by the player controller or something
-    private void PlayerTapped()
-    {
-        if (Input.anyKeyDown)
+        // player pressed a horizontal key
+        if (x != 0)
         {
             // time that the player thinks is the beat
-            playerBeat = gameManager.conductor.GetTime();
+            playerBeat = gameManager.conductor.songPosition;
 
-            // time that the game thinks is the beat (use previous beat to see if player hits too early for some reason?)
+            // time that the game thinks is the beat
             songBeat = gameManager.conductor.currentBeatTime;
 
-            float beatDifference = playerBeat - songBeat;
+            float lastBeatDifference = playerBeat - songBeat;
+            float nextBeatDifference = Mathf.Abs(playerBeat - gameManager.conductor.nextBeatTime);
+
+
+            float beatDifference = Mathf.Min(lastBeatDifference, nextBeatDifference);
 
             AddToQueue(beatDifference);
-
             playerOffset = GetAverageOffset();
-
         }
+
     }
 
     private void AddToQueue(float beatDifference)
