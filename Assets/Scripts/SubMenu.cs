@@ -10,7 +10,6 @@ public class SubMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("AAAARG");
         setDefaultSelection();
     }
 
