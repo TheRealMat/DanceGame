@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     GameManager gameManager;
-    private void Awake()
+    private void start()
     {
         gameManager.playerRef = this.gameObject;
     }
