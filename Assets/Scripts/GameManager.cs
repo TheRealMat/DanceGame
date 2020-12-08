@@ -11,9 +11,13 @@ public class GameManager : MonoBehaviour
     public Conductor conductor;
     public Settings settings;
     private bool paused = false;
+    public GameObject playerRef;
 
     string[] levels = new string[] { "MainMenu", "Level1" };
     int currentScene = 0;
+
+    public List<GameObject> gameEntities = new List<GameObject>();
+
 
     // should be relative to BPM somehow. i could maybe take the bpm from the song and then calculate like 5 bpm in either direction from player offset
     private float marginOfError;
