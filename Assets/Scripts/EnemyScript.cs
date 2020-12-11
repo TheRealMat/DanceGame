@@ -6,14 +6,19 @@ public class EnemyScript : MonoBehaviour
 {
     GameManager gameManager;
     GameObject player;
-    private void Awake()
+
+    float speed = 5;
+
+    private void Start()
     {
+        player = FindObjectOfType<PlayerScript>().gameObject;
         gameManager = FindObjectOfType<GameManager>();
         gameManager.gameEntities.Add(this.gameObject);
+        gameManager.events.onBeat += GoToPlayer;
     }
-
     public void Die()
     {
+        gameManager.events.onBeat -= GoToPlayer;
         gameManager.gameEntities.Remove(this.gameObject);
     }
 
@@ -24,14 +29,36 @@ public class EnemyScript : MonoBehaviour
         xDistance = this.transform.position.x - player.transform.position.x;
         yDistance = this.transform.position.y - player.transform.position.y;
 
-        if (xDistance < yDistance)
+        float step = speed * Time.deltaTime;
+
+        Debug.Log(xDistance);
+        Debug.Log(yDistance);
+
+        if (Mathf.Abs(xDistance) > Mathf.Abs(yDistance))
         {
-            // uhhh go towards X
+            Debug.Log("go x!");
+            // go toward X
+            if (Mathf.Abs(xDistance) != xDistance) //number is negative)
+            {
+                transform.position += Vector3.right;
+            }
+            else
+            {
+                transform.position += Vector3.left;
+            }
         }
         else
         {
+            Debug.Log("go y!");
             // go towards Y
+            if (Mathf.Abs(yDistance) != yDistance) //number is negative)
+            {
+                transform.position += Vector3.up;
+            }
+            else
+            {
+                transform.position += Vector3.down;
+            }
         }
-        
     }
 }

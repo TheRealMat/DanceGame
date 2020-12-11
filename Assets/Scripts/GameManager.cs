@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private float marginOfError = 0.05f;
 
     // there's some copypasta here from the offset counter, oh well!
-    public void ass(int x, int y)
+    public void HandleTurn(int x, int y)
     {
         float currentTime = conductor.songPosition;
         float lastBeat = conductor.currentBeatTime;
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-        events.onPlayerMove += ass;
+        events.onPlayerMove += HandleTurn;
 
     }
 }
