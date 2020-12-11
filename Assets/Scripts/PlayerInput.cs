@@ -13,35 +13,31 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        // using this let's you hold down a button and then press another button to fool the system. too bad!
-        if (Input.anyKeyDown)
+        // currently can't handle more than one input at a time, too bad!
+        if (Input.GetKeyDown("w"))
         {
-            // currently can't handle more than one input at a time, too bad!
-            if (Input.GetAxis("Vertical") > 0)
-            {
-                //up
-                gameManager.events.PlayerMoved(0, 1);
-            }
-
-            else if (Input.GetAxis("Vertical") < 0)
-            {
-                // down
-                gameManager.events.PlayerMoved(0, -1);
-            }
-
-            else if (Input.GetAxis("Horizontal") > 0)
-            {
-                //right
-                gameManager.events.PlayerMoved(1, 0);
-            }
-
-            else if (Input.GetAxis("Horizontal") < 0)
-            {
-                // left
-                gameManager.events.PlayerMoved(-1, 0);
-            }
+            //up
+            gameManager.events.PlayerMoved(0, 1);
         }
-        if (Input.GetKeyDown("escape"))
+
+        else if (Input.GetKeyDown("s"))
+        {
+            // down
+            gameManager.events.PlayerMoved(0, -1);
+        }
+
+        else if (Input.GetKeyDown("d"))
+        {
+            //right
+            gameManager.events.PlayerMoved(1, 0);
+        }
+
+        else if (Input.GetKeyDown("a"))
+        {
+            // left
+            gameManager.events.PlayerMoved(-1, 0);
+        }
+        else if (Input.GetKeyDown("escape"))
         {
             gameManager.Pause();
         }
