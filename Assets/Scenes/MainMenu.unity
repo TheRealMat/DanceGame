@@ -404,7 +404,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3293da38e8619f54a86be5b4244ee09b, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -800,11 +800,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44cb0dd5f5ca23a42ad6edd141b91d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMusic: {fileID: 11400000, guid: 41fb45495401c474baf76c62b47d088c, type: 2}
+  levelMusic: {fileID: 11400000, guid: 98606fe1ec8f4ad428f80d76e4254cdf, type: 2}
   musicSource: {fileID: 221999366}
   events: {fileID: 515535060}
   conductor: {fileID: 515535059}
   settings: {fileID: 515535061}
+  playerRef: {fileID: 0}
+  playerMoved: 0
+  gameEntities: []
 --- !u!114 &515535063
 MonoBehaviour:
   m_ObjectHideFlags: 0

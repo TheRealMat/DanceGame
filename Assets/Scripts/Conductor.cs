@@ -29,6 +29,8 @@ public class Conductor : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
 
+        gameManager.musicSource.clip = gameManager.levelMusic.Song;
+
         //Calculate the number of seconds in each beat
         secPerBeat = 60f / gameManager.levelMusic.BPM;
 
