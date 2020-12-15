@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
 
     // should be relative to BPM somehow. i could maybe take the bpm from the song and then calculate like 5 bpm in either direction from player offset
-    private float marginOfError = 0.05f;
+    private float marginOfError = 0.1f;
 
     // there's some copypasta here from the offset counter, oh well!
     public void HandleTurn(int x, int y)

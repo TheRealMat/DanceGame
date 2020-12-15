@@ -6,21 +6,45 @@ public class EnemyScript : MonoBehaviour
 {
     GameManager gameManager;
     GameObject player;
+    public int moveEvery;
+    int movesWaited = 1;
+    Vector3 desiredPosition;
 
-    float speed = 5;
+    float speed = 10;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerScript>().gameObject;
         gameManager = FindObjectOfType<GameManager>();
         gameManager.gameEntities.Add(this);
-        gameManager.events.onMoveEnemies += GoToPlayer;
+        gameManager.events.onMoveEnemies += Move;
     }
     public void Die()
     {
-        gameManager.events.onMoveEnemies -= GoToPlayer;
+        gameManager.events.onMoveEnemies -= Move;
         gameManager.gameEntities.Remove(this);
     }
+
+    // handles if enemy should move or wait another turn
+    private void Move()
+    {
+        if (movesWaited >= moveEvery)
+        {
+            movesWaited = 1;
+            GoToPlayer();
+        }
+        else
+        {
+            movesWaited++;
+        }
+    }
+
+    private void Update()
+    {
+        float step = speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, desiredPosition, step);
+    }
+
 
     public void GoToPlayer()
     {
@@ -29,35 +53,28 @@ public class EnemyScript : MonoBehaviour
         xDistance = this.transform.position.x - player.transform.position.x;
         yDistance = this.transform.position.y - player.transform.position.y;
 
-        float step = speed * Time.deltaTime;
-
-        Debug.Log(xDistance);
-        Debug.Log(yDistance);
-
         if (Mathf.Abs(xDistance) > Mathf.Abs(yDistance))
         {
-            Debug.Log("go x!");
             // go toward X
             if (Mathf.Abs(xDistance) != xDistance) //number is negative)
             {
-                transform.position += Vector3.right;
+                desiredPosition = transform.position + Vector3.right;
             }
             else
             {
-                transform.position += Vector3.left;
+                desiredPosition = transform.position + Vector3.left;
             }
         }
         else
         {
-            Debug.Log("go y!");
             // go towards Y
             if (Mathf.Abs(yDistance) != yDistance) //number is negative)
             {
-                transform.position += Vector3.up;
+                desiredPosition = transform.position + Vector3.up;
             }
             else
             {
-                transform.position += Vector3.down;
+                desiredPosition = transform.position + Vector3.down;
             }
         }
     }
