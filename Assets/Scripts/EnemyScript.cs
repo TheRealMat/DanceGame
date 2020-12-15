@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     GameManager gameManager;
-    GameObject player;
+    PlayerMovement player;
     public int moveEvery;
     int movesWaited = 1;
     Vector3 desiredPosition;
@@ -13,7 +13,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerScript>().gameObject;
+        player = FindObjectOfType<PlayerMovement>();
         gameManager = FindObjectOfType<GameManager>();
         gameManager.gameEntities.Add(this);
         gameManager.events.onMoveEnemies += Move;
@@ -41,6 +41,7 @@ public class EnemyScript : MonoBehaviour
     private void Update()
     {
         // really needs something to prevent it from moving while it's already moving
+        // also should probably snap to whole numbers
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, desiredPosition, step);
     }
@@ -53,16 +54,32 @@ public class EnemyScript : MonoBehaviour
         xDistance = this.transform.position.x - player.transform.position.x;
         yDistance = this.transform.position.y - player.transform.position.y;
 
+        // if this can't be done in a less stupid way i'll heat my shoe
         if (Mathf.Abs(xDistance) > Mathf.Abs(yDistance))
         {
             // go toward X
             if (Mathf.Abs(xDistance) != xDistance) //number is negative)
             {
-                desiredPosition = transform.position + Vector3.right;
+                // check if we're gonna hit player
+                if (desiredPosition + Vector3.right == player.desiredPosition)
+                {
+                    // attack player
+                }
+                else
+                {
+                    desiredPosition = transform.position + Vector3.right;
+                }
             }
             else
             {
-                desiredPosition = transform.position + Vector3.left;
+                if (desiredPosition + Vector3.left == player.desiredPosition)
+                {
+                    // attack player
+                }
+                else
+                {
+                    desiredPosition = transform.position + Vector3.left;
+                }
             }
         }
         else
@@ -70,11 +87,25 @@ public class EnemyScript : MonoBehaviour
             // go towards Y
             if (Mathf.Abs(yDistance) != yDistance) //number is negative)
             {
-                desiredPosition = transform.position + Vector3.up;
+                if (desiredPosition + Vector3.up == player.desiredPosition)
+                {
+                    // attack player
+                }
+                else
+                {
+                    desiredPosition = transform.position + Vector3.up;
+                }
             }
             else
             {
-                desiredPosition = transform.position + Vector3.down;
+                if (desiredPosition + Vector3.down == player.desiredPosition)
+                {
+                    // attack player
+                }
+                else
+                {
+                    desiredPosition = transform.position + Vector3.down;
+                }
             }
         }
     }

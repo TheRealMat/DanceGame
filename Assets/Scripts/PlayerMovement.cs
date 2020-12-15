@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     GameManager gameManager;
     float speed = 10;
-    Vector3 desiredPosition;
+    public Vector3 desiredPosition;
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
