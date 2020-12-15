@@ -28,11 +28,14 @@ public class Conductor : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+    }
 
-        gameManager.musicSource.clip = gameManager.levelMusic.Song;
+    public void PlaySong(LevelMusic music)
+    {
+        gameManager.musicSource.clip = music.Song;
 
         //Calculate the number of seconds in each beat
-        secPerBeat = 60f / gameManager.levelMusic.BPM;
+        secPerBeat = 60f / music.BPM;
 
         //Record the time when the music starts
         dspSongTime = GetTime();
@@ -46,7 +49,7 @@ public class Conductor : MonoBehaviour
         songPositionInBeatsOld = (int)songPositionInBeats;
 
         //determine how many seconds since the song started
-        songPosition = (GetTime() - dspSongTime - gameManager.levelMusic.firstBeatOffset);
+        songPosition = (GetTime() - dspSongTime - gameManager.levels[gameManager.currentScene].levelMusic.firstBeatOffset);
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;

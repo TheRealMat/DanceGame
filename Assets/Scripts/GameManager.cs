@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public LevelMusic levelMusic;
     public AudioSource musicSource;
     public GameEvents events;
     public Conductor conductor;
@@ -14,8 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject playerRef;
     public bool playerMoved;
 
-    string[] levels = new string[] { "MainMenu", "Level1" };
-    int currentScene = 0;
+    // this needs to be exactly the same as the build order. hmm
+    public Level[] levels = new Level[] { };
+    public int currentScene = 0;
 
     public List<EnemyScript> gameEntities = new List<EnemyScript>();
 
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private float marginOfError = 0.1f;
 
     // there's some copypasta here from the offset counter, oh well!
+    // does this really belong in the gamemanager?
     public void HandleTurn(int x, int y)
     {
         float currentTime = conductor.songPosition;
@@ -47,28 +48,13 @@ public class GameManager : MonoBehaviour
         Debug.Log(beatDifference);
         if (beatDifference < marginOfError)
         {
-            BeatSucceeded();
             Debug.Log("success!");
         }
         else
         {
-            BeatFailed();
             Debug.Log("fail!");
         }
         playerMoved = true;
-    }
-    public void BeatSucceeded()
-    {
-
-    }
-    public void BeatFailed()
-    {
-
-    }
-
-    public void NextTurn()
-    {
-
     }
 
 
@@ -90,7 +76,10 @@ public class GameManager : MonoBehaviour
     public void StartNextScene()
     {
         // !!! check if this gives build errors !!!
-        SceneManager.LoadScene(levels[currentScene + 1]);
+        // load level as an event?
+        currentScene += 1;
+        SceneManager.LoadScene(currentScene);
+        conductor.PlaySong(levels[currentScene].levelMusic);
     }
 
 

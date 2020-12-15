@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7729725748d0afb47b01bf8d3c0c5fad, type: 3}
+  m_Name: MainMenu
+  m_EditorClassIdentifier: 
+  levelMusic: {fileID: 11400000, guid: 41fb45495401c474baf76c62b47d088c, type: 2}
+  scene: '"MainMenu"'

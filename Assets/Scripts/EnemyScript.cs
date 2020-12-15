@@ -9,7 +9,6 @@ public class EnemyScript : MonoBehaviour
     public int moveEvery;
     int movesWaited = 1;
     Vector3 desiredPosition;
-
     float speed = 10;
 
     private void Start()
@@ -41,6 +40,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
+        // really needs something to prevent it from moving while it's already moving
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, desiredPosition, step);
     }

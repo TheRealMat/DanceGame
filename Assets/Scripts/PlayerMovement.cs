@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        // really needs something to prevent it from moving while it's already moving
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, desiredPosition, step);
     }
