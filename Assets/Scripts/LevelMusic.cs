@@ -13,4 +13,9 @@ public class LevelMusic : ScriptableObject
     public float firstBeatOffset;
 
     public float lastBeatPosition;
+
+    public AudioClip getSong() {
+        return Song;
+    } 
+
 }
