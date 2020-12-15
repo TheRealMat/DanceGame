@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     GameManager gameManager;
-    KeyCode lastHitKey;
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();

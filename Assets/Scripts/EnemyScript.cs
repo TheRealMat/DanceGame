@@ -13,13 +13,13 @@ public class EnemyScript : MonoBehaviour
     {
         player = FindObjectOfType<PlayerScript>().gameObject;
         gameManager = FindObjectOfType<GameManager>();
-        gameManager.gameEntities.Add(this.gameObject);
-        gameManager.events.onBeat += GoToPlayer;
+        gameManager.gameEntities.Add(this);
+        gameManager.events.onMoveEnemies += GoToPlayer;
     }
     public void Die()
     {
-        gameManager.events.onBeat -= GoToPlayer;
-        gameManager.gameEntities.Remove(this.gameObject);
+        gameManager.events.onMoveEnemies -= GoToPlayer;
+        gameManager.gameEntities.Remove(this);
     }
 
     public void GoToPlayer()

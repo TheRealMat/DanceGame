@@ -8,11 +8,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        gameManager.events.onPlayerMove += PlayerMove;
+        gameManager.events.onMovePlayer += PlayerMove;
     }
     private void OnDisable()
     {
-        gameManager.events.onPlayerMove -= PlayerMove;
+        gameManager.events.onMovePlayer -= PlayerMove;
     }
 
     void PlayerMove(int x, int y)

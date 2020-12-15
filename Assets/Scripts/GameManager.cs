@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     string[] levels = new string[] { "MainMenu", "Level1" };
     int currentScene = 0;
 
-    public List<GameObject> gameEntities = new List<GameObject>();
+    public List<EnemyScript> gameEntities = new List<EnemyScript>();
 
 
     // should be relative to BPM somehow. i could maybe take the bpm from the song and then calculate like 5 bpm in either direction from player offset
