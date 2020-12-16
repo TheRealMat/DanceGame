@@ -6,10 +6,12 @@ using System.Linq;
 public class PlayerMovement : MonoBehaviour
 {
     GameManager gameManager;
+    PlayerScript playerScript;
     float speed = 10;
     public Vector3 desiredPosition;
     void Start()
     {
+        playerScript = FindObjectOfType<PlayerScript>();
         gameManager = FindObjectOfType<GameManager>();
         gameManager.events.onMovePlayer += PlayerMove;
     }
@@ -43,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // attack enemy
+            playerScript.Attack(enemy.GetComponent<Damageable>());
         }
 
     }

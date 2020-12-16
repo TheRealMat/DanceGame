@@ -10,6 +10,7 @@ public class EnemyScript : MonoBehaviour
     int movesWaited = 1;
     Vector3 desiredPosition;
     float speed = 10;
+    int damage = 1;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class EnemyScript : MonoBehaviour
         gameManager.gameEntities.Add(this);
         gameManager.events.onMoveEnemies += Move;
     }
-    public void Die()
+    private void OnDestroy()
     {
         gameManager.events.onMoveEnemies -= Move;
         gameManager.gameEntities.Remove(this);
@@ -45,7 +46,10 @@ public class EnemyScript : MonoBehaviour
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, desiredPosition, step);
     }
-
+    public void Attack(Damageable damageable)
+    {
+        damageable.TakeDamage(damage);
+    }
 
     public void GoToPlayer()
     {
@@ -64,6 +68,7 @@ public class EnemyScript : MonoBehaviour
                 if (desiredPosition + Vector3.right == player.desiredPosition)
                 {
                     // attack player
+                    Attack(player.GetComponent<Damageable>());
                 }
                 else
                 {
@@ -75,6 +80,7 @@ public class EnemyScript : MonoBehaviour
                 if (desiredPosition + Vector3.left == player.desiredPosition)
                 {
                     // attack player
+                    Attack(player.GetComponent<Damageable>());
                 }
                 else
                 {
@@ -90,6 +96,7 @@ public class EnemyScript : MonoBehaviour
                 if (desiredPosition + Vector3.up == player.desiredPosition)
                 {
                     // attack player
+                    Attack(player.GetComponent<Damageable>());
                 }
                 else
                 {
@@ -101,6 +108,7 @@ public class EnemyScript : MonoBehaviour
                 if (desiredPosition + Vector3.down == player.desiredPosition)
                 {
                     // attack player
+                    Attack(player.GetComponent<Damageable>());
                 }
                 else
                 {
