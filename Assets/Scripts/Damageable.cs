@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
+    GameManager gameManager;
     public int maxHealth;
-    public int currentHealth;
+    int currentHealth;
+    public AudioClip hitSound;
+    public AudioClip dieSound;
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         currentHealth = maxHealth;
     }
     public void TakeDamage(int damage)
@@ -16,11 +20,13 @@ public class Damageable : MonoBehaviour
         if(damage >= currentHealth)
         {
             currentHealth = 0;
+            gameManager.musicSource.PlayOneShot(dieSound);
             Destroy(this.gameObject);
         }
         else
         {
             currentHealth -= damage;
+            gameManager.musicSource.PlayOneShot(hitSound);
         }
     }
 }

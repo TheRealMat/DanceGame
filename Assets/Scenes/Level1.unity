@@ -3589,6 +3589,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
+  hitSound: {fileID: 8300000, guid: 827a64f256a506b44adfa27c094416af, type: 3}
+  dieSound: {fileID: 8300000, guid: 095ece2b65d1dee449da39ecd76cfb3a, type: 3}
 --- !u!1 &1314047570
 GameObject:
   m_ObjectHideFlags: 0
@@ -3731,6 +3733,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
+  hitSound: {fileID: 8300000, guid: 278e87a21fe84dd4999768a02a23c030, type: 3}
+  dieSound: {fileID: 8300000, guid: 095ece2b65d1dee449da39ecd76cfb3a, type: 3}
 --- !u!1 &1823831500
 GameObject:
   m_ObjectHideFlags: 0
