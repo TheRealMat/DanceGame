@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     PlayerScript playerScript;
     float speed = 10;
     public Vector3 desiredPosition;
+    public bool attacking = false;
+    Vector3 previousPosition;
+
     void Start()
     {
         playerScript = FindObjectOfType<PlayerScript>();
@@ -26,11 +29,19 @@ public class PlayerMovement : MonoBehaviour
         // also should probably snap to whole numbers
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, desiredPosition, step);
+        if (attacking)
+        {
+            if(transform.position == desiredPosition)
+            {
+                desiredPosition = previousPosition;
+                attacking = false;
+            }
+        }
     }
 
     void PlayerMove(int x, int y)
-    {   
-
+    {
+        previousPosition = this.transform.position;
 
         // check if moving into an enemy
         EnemyScript enemy = (from item in gameManager.gameEntities
@@ -46,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
         {
             // attack enemy
             playerScript.Attack(enemy.GetComponent<Damageable>());
+            desiredPosition = new Vector2(transform.position.x + (float)x / 2, transform.position.y + (float)y / 2);
+            attacking = true;
         }
 
     }
