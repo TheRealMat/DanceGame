@@ -14,6 +14,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Start()
     {
+        desiredPosition = this.transform.position;
         player = FindObjectOfType<PlayerMovement>();
         gameManager = FindObjectOfType<GameManager>();
         gameManager.gameEntities.Add(this);
